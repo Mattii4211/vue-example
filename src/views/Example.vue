@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import DefaultTable from '../components/DefaultTable.vue'
-import { TransitionGroup } from 'vue'
 
 
 const count = ref(0);
