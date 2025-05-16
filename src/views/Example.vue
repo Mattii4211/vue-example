@@ -1,6 +1,8 @@
 <script setup>
-import { ref } from 'vue'
-import DefaultTable from './DefaultTable.vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import DefaultTable from '../components/DefaultTable.vue'
+import { TransitionGroup } from 'vue'
+
 
 const count = ref(0);
 const multiplier = ref(1);
@@ -8,6 +10,29 @@ const text = ref('');
 const items = ref(new Set());
 const itemsWithCounter = ref([]);
 const btnClass = ref('btn btn-dark');
+
+onMounted(() => {
+  const savedData = localStorage.getItem('counter');
+  if (savedData) {
+    const { count: savedCount, multiplier: savedMultiplier, text: savedText, items: savedItems, itemsWithCounter: savedItemsWithCounter } = JSON.parse(savedData);
+    count.value = savedCount;
+    multiplier.value = savedMultiplier;
+    text.value = savedText;
+    items.value = new Set(savedItems);
+    itemsWithCounter.value = savedItemsWithCounter;
+  }
+});
+
+onBeforeUnmount(() => {
+  localStorage.setItem('counter', JSON.stringify({
+    count: count.value,
+    multiplier: multiplier.value,
+    text: text.value,
+    items: Array.from(items.value),
+    itemsWithCounter: itemsWithCounter.value
+  }
+  ));
+});
 
 const updateCounter = () => {
   count.value += multiplier.value;
@@ -79,6 +104,7 @@ const resetAll = () => {
 .fade-leave-active {
   transition: all 0.3s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;

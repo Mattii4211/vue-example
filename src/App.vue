@@ -1,8 +1,13 @@
 <script setup>
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Example from './components/Example.vue'
 </script>
 
 <template>
-    <Example />
+   <div class="container mt-4">
+    <nav>
+        <router-link to="/" class="btn btn-primary me-2">Home</router-link>
+        <router-link to="/example" class="btn btn-primary me-2">Licznik</router-link>
+    </nav>
+    <router-view class="mt-4" />
+  </div>
 </template>
