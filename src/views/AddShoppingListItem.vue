@@ -45,4 +45,5 @@ const save = () => {
     <option value="high">Wysoki</option>
   </select>
   <button @click="save" class="btn btn-success">Zapisz</button>
+  <button @click="$router.push('/shopping_list')" class="btn btn-danger">Anuluj</button>
 </template>
