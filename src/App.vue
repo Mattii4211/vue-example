@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
     <nav>
         <router-link to="/" class="btn btn-primary me-2">Home</router-link>
         <router-link to="/example" class="btn btn-primary me-2">Licznik</router-link>
+        <router-link to="/shopping_list" class="btn btn-primary me-2">Lista zakupów</router-link>
     </nav>
     <router-view class="mt-4" />
   </div>
