@@ -5,8 +5,8 @@ defineProps(['item']);
 <template>
   <div class="card mb-2">
     <div class="card-body">
-      <h5>{{ item.name }}</h5>
-      <p>Ilość: {{ item.quantity }}</p>
+      <h4>{{ item.name }}</h4>
+      <h5>Ilość: {{ item.quantity }} {{ item.unit }}</h5>
       <span class="badge bg-secondary">{{ item.priority }}</span>
       <button class="btn btn-danger float-end" @click="$emit('remove', item.id)">Usuń</button>
     </div>
