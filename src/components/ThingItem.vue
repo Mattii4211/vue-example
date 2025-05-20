@@ -1,15 +1,11 @@
 <script setup>
-const props = defineProps(['item'])
-const emit = defineEmits(['remove', 'click-color'])
+defineProps(['item'])
 
-const handleClick = () => {
-  emit('click-color', props.item.id)
-}
 </script>
 
 <template>
   <div class="card mb-2">
-    <div class="card-body" :class="item.level ? `bg-green-${item.level}` : ''" @click="handleClick">
+    <div class="card-body" :class="item.level ? `bg-green-${item.level}` : ''" @click="$emit('click-color', item.id)">
       <h4>{{ item.name }}</h4>
       <h5>Ilość: {{ item.quantity }} {{ item.unit }}</h5>
       <span class="badge bg-secondary">{{ item.priority }}</span>

@@ -34,7 +34,7 @@ const save = () => {
 <template>
   <h2>Dodaj produkt</h2>
   <input v-model="name" placeholder="Produkt" class="form-control mb-2" />
-  <input v-model="quantity" type="number" min="0" placeholder="Ilość" class="form-control mb-2" />
+  <input v-model="quantity" type="number" min="0" step="0.1" placeholder="Ilość" class="form-control mb-2" />
   <select v-model="unit" class="form-select mb-2">
     <option value="szt">sztuk</option>
     <option value="kg">kilogram</option>
