@@ -24,6 +24,13 @@ const removeItem = (id) => {
     localStorage.setItem('items', JSON.stringify(updatedItems));
     items.value = updatedItems;
 };
+
+const increaseColor = (id) => {
+    const item = items.value.find(i => i.id === id)
+    if (item && (item.level === undefined || item.level < 900)) {
+        item.level === undefined ? item.level = 100 : item.level += 100
+    }
+}
 </script>
 
 <template>
@@ -32,5 +39,5 @@ const removeItem = (id) => {
     <button v-if="items.length" @click="clear" class="btn btn-success">Wyczyść listę</button>
     <hr class="" />
     <div v-if="!items.length">Brak listy zakupów</div>
-    <ThingItem v-for="item in items" :key="item.id" :item="item" @remove="removeItem" />
+    <ThingItem v-for="item in items" :key="item.id" :item="item" @remove="removeItem" @click-color="increaseColor" />
 </template>

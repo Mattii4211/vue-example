@@ -14,7 +14,8 @@ const save = () => {
     name: name.value,
     quantity: quantity.value,
     priority: priority.value,
-    unit: unit.value
+    unit: unit.value,
+    level: null,
   }
 
   const isValid = Object.values(item).every(value => value !== '' && value !== 0)
