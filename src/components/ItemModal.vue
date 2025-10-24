@@ -12,11 +12,7 @@
                     <p>Dodano: {{ item.createdAt }}</p>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-warning" @click="$emit('edit', item, {
-                        name: item.name + ' (edytowany)',
-                        quantity: item.quantity + 1,
-                        priority: 'normal'
-                    })">Edytuj</button>
+                    <button class="btn btn-warning" @click="handleEdit">Edytuj</button>
                     <button class="btn btn-secondary" @click="close">Zamknij</button>
                 </div>
             </div>
@@ -28,11 +24,22 @@
 import { Modal } from 'bootstrap'
 import { ref, watchEffect, watch, nextTick } from 'vue'
 
+const emit = defineEmits(['edit'])
+
 const props = defineProps({
     item: Object
 })
 const modalRef = ref(null)
 let bootstrapModal = null
+
+const handleEdit = () => {
+  emit('edit', props.item, {
+    name: props.item.name + ' (edytowany)',
+    quantity: props.item.quantity + 1,
+    priority: 'normal'
+  })
+  close()
+}
 
 const initModal = () => {
     if (!bootstrapModal && modalRef.value) {

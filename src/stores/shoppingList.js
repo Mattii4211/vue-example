@@ -36,33 +36,18 @@ export const useShoppingListStore = defineStore('shoppingList', {
         },
 
         updateQuantity(id, newQuantity) {
-            this.items = this.items.map(item =>
-                item.id === id
-                    ? {
-                        ...item,
-                        quantity: newQuantity
-                    }
-                    : item
-            )
+            const item = this.items.find(i => i.id === id)
+            if (item) item.quantity = newQuantity
         },
 
         updateColorLevel(id, newLevel) {
-            this.items = this.items.map(item =>
-                item.id === id
-                    ? {
-                        ...item,
-                        level: newLevel
-                    }
-                    : item
-            )
+            const item = this.items.find(i => i.id === id)
+            if (item) item.level = newLevel
         },
-        
+
         editItem(id, updatedFields) {
-            this.items = this.items.map(item =>
-                item.id === id
-                ? { ...item, ...updatedFields }
-                : item
-            )
+            const item = this.items.find(i => i.id === id)
+            if (item) Object.assign(item, updatedFields)
         },
     }
 })
