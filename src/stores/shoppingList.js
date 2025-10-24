@@ -55,6 +55,14 @@ export const useShoppingListStore = defineStore('shoppingList', {
                     }
                     : item
             )
-        }   
+        },
+        
+        editItem(id, updatedFields) {
+            this.items = this.items.map(item =>
+                item.id === id
+                ? { ...item, ...updatedFields }
+                : item
+            )
+        },
     }
 })
