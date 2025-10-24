@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useShoppingListStore } from '@/stores/shoppingList'
 
+const store = useShoppingListStore();
 const router = useRouter()
 const name = ref('')
 const quantity = ref(0)
@@ -18,15 +20,16 @@ const save = () => {
     level: null,
   }
 
-  const isValid = Object.values(item).every(value => value !== '' && value !== 0)
+  // const isValid = Object.values(item).every(value => value !== '' && value !== 0)
 
-  if (!isValid) {
-    alert('Nazwa i ilość są wymagane')
-    return
-  }
+  // if (!isValid) {
+  //   alert('Nazwa i ilość są wymagane')
+  //   return
+  // }
 
-  const current = JSON.parse(localStorage.getItem('items')) || []
-  localStorage.setItem('items', JSON.stringify([...current, item]))
+  try { store.addItem(item) }
+  catch (e) { alert(e.message) }  
+  // store.addItem(item);
   router.push('/shopping_list')
 }
 </script>
