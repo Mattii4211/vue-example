@@ -22,7 +22,8 @@ export const useShoppingListStore = defineStore('shoppingList', {
                 quantity,
                 priority,
                 unit,
-                level: 0
+                level: 0,
+                createdAt: new Date()
             })
         },
 
@@ -34,22 +35,26 @@ export const useShoppingListStore = defineStore('shoppingList', {
             this.items = []
         },
 
-        increaseColor(id) {
-            const getNextLevel = (level) => {
-                if (level !== undefined) {
-                    return Math.min(level + 100, 900);
-                }
-                return 100;
-            };
-
+        updateQuantity(id, newQuantity) {
             this.items = this.items.map(item =>
                 item.id === id
                     ? {
                         ...item,
-                        level: getNextLevel(item.level)
+                        quantity: newQuantity
                     }
                     : item
             )
-        }
+        },
+
+        updateColorLevel(id, newLevel) {
+            this.items = this.items.map(item =>
+                item.id === id
+                    ? {
+                        ...item,
+                        level: newLevel
+                    }
+                    : item
+            )
+        }   
     }
 })

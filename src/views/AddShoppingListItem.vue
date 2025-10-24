@@ -12,25 +12,20 @@ const unit = ref('szt')
 
 const save = () => {
   const item = {
-    id: Date.now(),
     name: name.value,
     quantity: quantity.value,
     priority: priority.value,
     unit: unit.value,
-    level: null,
   }
 
-  // const isValid = Object.values(item).every(value => value !== '' && value !== 0)
-
-  // if (!isValid) {
-  //   alert('Nazwa i ilość są wymagane')
-  //   return
-  // }
-
-  try { store.addItem(item) }
-  catch (e) { alert(e.message) }  
-  // store.addItem(item);
-  router.push('/shopping_list')
+  try { 
+    store.addItem(item);
+    router.push('/shopping_list')
+  }
+  catch (e) { 
+    alert(e.message) 
+  }  
+  
 }
 </script>
 
@@ -42,6 +37,7 @@ const save = () => {
     <option value="szt">sztuk</option>
     <option value="kg">kilogram</option>
     <option value="g">gram</option>
+    <option value="l">litr</option>
   </select>
   <select v-model="priority" class="form-select mb-2">
     <option value="low">Niski</option>

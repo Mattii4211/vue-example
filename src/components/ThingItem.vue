@@ -1,14 +1,26 @@
 <script setup>
-defineProps(['item'])
+import { useProductHelper } from '@/composables/useProductHelper'
+
+const props = defineProps({
+  item: { type: Object, required: true }
+})
+
+const { quantity, colorLevel, increment, decrement, formatDate, incrementColor, decrementColor } = useProductHelper(props.item)
 
 </script>
 
 <template>
   <div class="card mb-2">
-    <div class="card-body" :class="item.level ? `bg-green-${item.level}` : ''" @click="$emit('click-color', item.id)">
+    <div class="card-body" :class="item.level ? `bg-green-${colorLevel}` : ''">
       <h4>{{ item.name }}</h4>
-      <h5>Ilość: {{ item.quantity }} {{ item.unit }}</h5>
+      <h5>Ilość: {{ quantity }} {{ item.unit }}</h5>
       <span class="badge bg-secondary">{{ item.priority }}</span>
+       <p>Dodano: {{ formatDate() }}</p>
+      <button @click="increment" class="btn btn-sm btn-success me-1">+</button>
+      <button @click="decrement" class="btn btn-sm btn-danger me-1">-</button>
+      <br />
+      <button @click="incrementColor" class="btn btn-sm btn-info me-1">Kolor+</button>
+      <button @click="decrementColor" class="btn btn-sm btn-info me-1">Kolor-</button>
       <button class="btn btn-danger float-end" @click.stop="$emit('remove', item.id)">Usuń</button>
     </div>
   </div>
